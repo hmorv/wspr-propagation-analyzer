@@ -1,9 +1,9 @@
 import { describe, expect, it } from "vitest";
 
-import { DefaultCycleBuilder } from "../../../src/core/analysis/default-cycle-builder.js";
-import { DataSource } from "../../../src/core/models/digital-spot.js";
-import type { DigitalSpot } from "../../../src/core/models/digital-spot.js";
-import type { DigitalTransmission } from "../../../src/core/models/digital-transmission.js";
+import { DefaultCycleBuilder } from "../../src/core/analysis/default-cycle-builder.js";
+import { DataSource } from "../../src/core/models/digital-spot.js";
+import type { DigitalSpot } from "../../src/core/models/digital-spot.js";
+import type { DigitalTransmission } from "../../src/core/models/digital-transmission.js";
 
 describe("DefaultCycleBuilder", () => {
   it("groups WSPRnet reports into a transmission cycle", () => {
