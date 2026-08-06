@@ -1,0 +1,40 @@
+{
+  "name": "wspr-propagation-analyzer",
+  "version": "0.1.0",
+  "description": "Local TypeScript toolkit to parse WSJT-X and WSPRnet data, analyze WSPR propagation sessions, and compare eclipse and control-day results.",
+  "type": "module",
+  "main": "dist/src/index.js",
+  "scripts": {
+    "dev": "tsx src/cli.ts",
+    "build": "tsc",
+    "start": "node dist/src/cli.js",
+    "check": "tsc --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hmorv/wspr-propagation-analyzer.git"
+  },
+  "keywords": [
+    "wspr",
+    "wsjt-x",
+    "ham-radio",
+    "radio",
+    "propagation",
+    "analysis",
+    "eclipse"
+  ],
+  "author": "Hugo Moragues <ea6ajt@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/hmorv/wspr-propagation-analyzer/issues"
+  },
+  "homepage": "https://github.com/hmorv/wspr-propagation-analyzer#readme",
+  "devDependencies": {
+    "@types/node": "^24.3.0",
+    "tsx": "^4.20.5",
+    "typescript": "^5.9.2",
+    "vitest": "^3.2.4"
+  }
+}
