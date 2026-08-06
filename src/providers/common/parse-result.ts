@@ -7,6 +7,7 @@ export interface ParseIssue {
 export interface ParseResult<T> {
   records: T[];
   issues: ParseIssue[];
-  ignoredLines: number;
+  blankLines: number;
+  ignoredRecords: number;
   totalLines: number;
 }

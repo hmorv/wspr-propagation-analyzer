@@ -40,7 +40,8 @@ export class DefaultWsjtxPipeline implements WsjtxPipeline {
         cycleDurationSeconds:
           options.cycleDurationSeconds ?? 120,
         timestampToleranceSeconds:
-          options.timestampToleranceSeconds ?? 30
+          options.timestampToleranceSeconds ?? 30,
+        reportMissingTransmissionSpots: false
       }
     );
 
@@ -58,7 +59,8 @@ export class DefaultWsjtxPipeline implements WsjtxPipeline {
       cycleIssues: cycleResult.issues,
       statistics: {
         totalLines: parseResult.totalLines,
-        ignoredLines: parseResult.ignoredLines,
+        blankLines: parseResult.blankLines,
+        ignoredRecords: parseResult.ignoredRecords,
         parsedRecords: parseResult.records.length,
         transmissions: mappingResult.transmissions.length,
         receptionSpots: mappingResult.spots.length,
