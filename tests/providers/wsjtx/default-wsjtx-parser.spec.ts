@@ -13,6 +13,8 @@ describe("DefaultWsjtxParser", () => {
 
     expect(result.issues).toHaveLength(0);
     expect(result.records).toHaveLength(1);
+    expect(result.blankLines).toBe(0);
+    expect(result.ignoredRecords).toBe(0);
 
     const record = result.records[0];
 
@@ -43,6 +45,8 @@ describe("DefaultWsjtxParser", () => {
 
     expect(result.issues).toHaveLength(0);
     expect(result.records).toHaveLength(1);
+    expect(result.blankLines).toBe(0);
+    expect(result.ignoredRecords).toBe(0);
 
     const record = result.records[0];
 
@@ -82,6 +86,8 @@ describe("DefaultWsjtxParser", () => {
 
     expect(result.issues).toHaveLength(0);
     expect(result.records).toHaveLength(1);
+    expect(result.blankLines).toBe(0);
+    expect(result.ignoredRecords).toBe(0);
 
     const record = result.records[0];
 
@@ -115,6 +121,8 @@ describe("DefaultWsjtxParser", () => {
 
     expect(result.issues).toHaveLength(0);
     expect(result.records).toHaveLength(1);
+    expect(result.blankLines).toBe(0);
+    expect(result.ignoredRecords).toBe(0);
 
     const record = result.records[0];
 
@@ -129,6 +137,32 @@ describe("DefaultWsjtxParser", () => {
     expect(record.powerDbm).toBe(23);
   });
 
+  it("ignores non-spot Rx WSPR records", () => {
+    const text =
+      "250927_224545 14.074 Rx WSPR -15 0.9 751 IU8RFW KC1OXG RR73";
+
+    const result = parser.parse(text);
+
+    expect(result.records).toHaveLength(0);
+    expect(result.issues).toHaveLength(0);
+    expect(result.blankLines).toBe(0);
+    expect(result.ignoredRecords).toBe(1);
+    expect(result.totalLines).toBe(1);
+  });
+
+  it("ignores Tune transmission records", () => {
+    const text =
+      "260529_172244 14.096 Tx WSPR 0 0.0 1444 TUNE";
+
+    const result = parser.parse(text);
+
+    expect(result.records).toHaveLength(0);
+    expect(result.issues).toHaveLength(0);
+    expect(result.blankLines).toBe(0);
+    expect(result.ignoredRecords).toBe(1);
+    expect(result.totalLines).toBe(1);
+  });
+
   it("reports malformed records without aborting the full parse", () => {
     const text = [
       "260806 1754 -23 -0.15 7.0400030 OE7XZB JN57 23 0 0.17 1",
@@ -141,7 +175,8 @@ describe("DefaultWsjtxParser", () => {
 
     expect(result.records).toHaveLength(2);
     expect(result.issues).toHaveLength(1);
-    expect(result.ignoredLines).toBe(1);
+    expect(result.blankLines).toBe(1);
+    expect(result.ignoredRecords).toBe(0);
     expect(result.totalLines).toBe(4);
 
     expect(result.issues[0]).toEqual({

@@ -19,10 +19,12 @@ describe("DefaultWsjtxPipeline", () => {
     });
 
     expect(result.parseIssues).toHaveLength(0);
+    expect(result.cycleIssues).toHaveLength(0);
 
     expect(result.statistics).toEqual({
       totalLines: 4,
-      ignoredLines: 0,
+      blankLines: 0,
+      ignoredRecords: 0,
       parsedRecords: 4,
       transmissions: 2,
       receptionSpots: 2,
@@ -56,7 +58,17 @@ describe("DefaultWsjtxPipeline", () => {
     });
 
     expect(result.parseIssues).toHaveLength(1);
-    expect(result.statistics.parsedRecords).toBe(1);
-    expect(result.statistics.rxCycles).toBe(1);
+    expect(result.cycleIssues).toHaveLength(0);
+
+    expect(result.statistics).toEqual({
+      totalLines: 2,
+      blankLines: 0,
+      ignoredRecords: 0,
+      parsedRecords: 1,
+      transmissions: 0,
+      receptionSpots: 1,
+      txCycles: 0,
+      rxCycles: 1
+    });
   });
 });

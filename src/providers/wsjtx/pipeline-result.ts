@@ -9,7 +9,8 @@ export interface WsjtxPipelineResult {
 
   statistics: {
     totalLines: number;
-    ignoredLines: number;
+    blankLines: number;
+    ignoredRecords: number;
     parsedRecords: number;
     transmissions: number;
     receptionSpots: number;

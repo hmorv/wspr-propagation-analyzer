@@ -5,12 +5,13 @@
   "type": "module",
   "main": "dist/src/index.js",
   "scripts": {
-    "dev": "tsx src/cli.ts",
     "build": "tsc",
     "start": "node dist/src/cli.js",
     "check": "tsc --noEmit",
     "test": "vitest run",
-    "test:watch": "vitest"
+    "test:watch": "vitest",
+    "analyze": "tsx src/cli/analyze.ts",
+    "dev": "tsx src/cli/analyze.ts"
   },
   "repository": {
     "type": "git",

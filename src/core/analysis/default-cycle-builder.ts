@@ -77,7 +77,10 @@ export class DefaultCycleBuilder implements CycleBuilder {
           )
         );
 
-        if (matchingSpots.length === 0) {
+        if (
+          matchingSpots.length === 0 &&
+          options.reportMissingTransmissionSpots
+        ) {
           issues.push({
             timestamp: transmission.timestamp,
             message:

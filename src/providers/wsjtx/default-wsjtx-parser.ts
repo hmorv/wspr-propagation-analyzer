@@ -25,15 +25,23 @@ export class DefaultWsjtxParser implements WsjtxParser {
     const issues: ParseIssue[] = [];
 
     const lines = text.split(/\r?\n/);
-    let ignoredLines = 0;
+    let blankLines = 0;
+    let ignoredRecords = 0;
 
     lines.forEach((line, index) => {
       const rawLine = line;
       const trimmedLine = line.trim();
 
-      if (!trimmedLine) {
-        ignoredLines += 1;
-        return;
+      if (!trimmedLine || this.shouldIgnoreLine(trimmedLine)) {
+        if (!trimmedLine) {
+          blankLines += 1;
+          return;
+        }
+
+        if (this.shouldIgnoreLine(trimmedLine)) {
+          ignoredRecords += 1;
+          return;
+        }
       }
 
       try {
@@ -63,9 +71,20 @@ export class DefaultWsjtxParser implements WsjtxParser {
     return {
       records,
       issues,
-      ignoredLines,
+      blankLines,
+      ignoredRecords,
       totalLines: lines.length
     };
+  }
+
+  private shouldIgnoreLine(line: string): boolean {
+    const isNonSpotRxRecord =
+      /^\d{6}_\d{6}\s+\S+\s+Rx\s+WSPR\b/.test(line);
+
+    const isTuneTransmission =
+      /^\d{6}_\d{6}\s+\S+\s+Tx\s+WSPR\b.*\bTUNE\s*$/.test(line);
+
+    return isNonSpotRxRecord || isTuneTransmission;
   }
 
   private parseLine(
