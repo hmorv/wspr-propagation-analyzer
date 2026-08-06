@@ -1,4 +1,10 @@
+export { DefaultWsjtxMapper } from "./mapper.js";
 export { DefaultWsjtxParser } from "./default-wsjtx-parser.js";
+
+export type {
+  WsjtxMapper,
+  WsjtxMappingResult
+} from "./mapper.js";
 
 export type { WsjtxParser } from "./parser.js";
 
