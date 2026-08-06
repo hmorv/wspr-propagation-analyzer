@@ -11,3 +11,7 @@ export type {
   DigitalMode,
   DigitalSpot
 } from "./digital-spot.js";
+
+export type {
+  DigitalTransmission
+} from "./digital-transmission.js";
