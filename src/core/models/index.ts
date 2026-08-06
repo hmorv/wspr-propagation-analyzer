@@ -1,9 +1,13 @@
 export type {
-  AmateurBand,
-  Experiment,
-  Reception,
-  ReceptionReport,
-  SoftwareConfiguration,
-  StationConfiguration,
-  Transmission
-} from "./experiment.js";
+  Power,
+  PowerUnit
+} from "./power.js";
+
+export {
+  DataSource
+} from "./digital-spot.js";
+
+export type {
+  DigitalMode,
+  DigitalSpot
+} from "./digital-spot.js";
