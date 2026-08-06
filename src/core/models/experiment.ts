@@ -1,3 +1,5 @@
+import type { WsprCycle } from "./wspr-cycle.js";
+
 export type AmateurBand =
   | "160m"
   | "80m"
@@ -28,43 +30,6 @@ export interface SoftwareConfiguration {
   version?: string;
 }
 
-export interface Transmission {
-  timestamp: Date;
-  frequencyMHz: number;
-  callsign: string;
-  locator?: string;
-  powerDbm: number;
-  mode: string;
-  source: string;
-}
-
-export interface Reception {
-  timestamp: Date;
-  receiverCallsign?: string;
-  receivedCallsign: string;
-  receivedLocator?: string;
-  frequencyMHz: number;
-  snrDb: number;
-  powerDbm?: number;
-  mode: string;
-  source: string;
-}
-
-export interface ReceptionReport {
-  timestamp: Date;
-  transmitterCallsign: string;
-  transmitterLocator?: string;
-  reporterCallsign: string;
-  reporterLocator?: string;
-  frequencyMHz: number;
-  snrDb: number;
-  powerDbm?: number;
-  distanceKm?: number;
-  azimuthDegrees?: number;
-  mode: string;
-  source: string;
-}
-
 export interface Experiment {
   id: string;
   title: string;
@@ -74,7 +39,6 @@ export interface Experiment {
   powerWatts: number;
   software?: SoftwareConfiguration[];
   station: StationConfiguration;
-  transmissions: Transmission[];
-  receptions: Reception[];
-  receptionReports: ReceptionReport[];
+  cycles: WsprCycle[];
+  notes?: string;
 }
